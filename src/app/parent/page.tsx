@@ -164,7 +164,7 @@ export default function ParentPage() {
       title="학부모 페이지"
       activeKey={student ? activeKey : null}
       items={PARENT_SECTIONS as any}
-      onChange={setActiveKey}
+      onChange={(key) => setActiveKey(key as ParentSectionKey)}
     >
       {content}
     </DashboardShell>

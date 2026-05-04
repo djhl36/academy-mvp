@@ -71,9 +71,9 @@ export default function AcademicRecordForm({ onCreated }: Props) {
         .order('name', { ascending: true }),
     ])
 
-    const typedGroups: GroupRow[] = (groupData ?? []) as GroupRow[]
-    const typedSubjects: Subject[] = (subjectData ?? []) as Subject[]
-    
+    const typedGroups = (groupData ?? []) as unknown as GroupRow[]
+    const typedSubjects = (subjectData ?? []) as unknown as Subject[]
+
     setGroups(typedGroups)
     setSubjects(typedSubjects)
   }

@@ -16,9 +16,10 @@ type StudentItem = {
 type GroupRow = {
   id: string
   name: string
+  subject_id?: string
   class_group_students: {
     student_id: string
-    students: Student | Student[] | null
+    students: StudentItem[] | StudentItem | null
   }[]
 }
 
@@ -71,7 +72,7 @@ export default function AcademicRecordForm({ onCreated }: Props) {
     ])
 
     setGroups((groupData as unknown as GroupRow[]) ?? [])
-    setGroups((groupData as unknown as GroupRow[]) ?? [])
+    setSubjects((subjectData as unknown as Subject[]) ?? [])
   }
 
   const selectedGroup = useMemo(

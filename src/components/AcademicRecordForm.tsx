@@ -71,8 +71,11 @@ export default function AcademicRecordForm({ onCreated }: Props) {
         .order('name', { ascending: true }),
     ])
 
-    setGroups((groupData as unknown as GroupRow[]) ?? [])
-    setSubjects((subjectData as unknown as Subject[]) ?? [])
+    const typedGroups: GroupRow[] = (groupData ?? []) as GroupRow[]
+    const typedSubjects: Subject[] = (subjectData ?? []) as Subject[]
+    
+    setGroups(typedGroups)
+    setSubjects(typedSubjects)
   }
 
   const selectedGroup = useMemo(

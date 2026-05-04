@@ -14,7 +14,7 @@ type Props = {
   subtitle?: string
   activeKey: string | null
   items: SectionItem[]
-  onChange: (key: string) => void
+  onChange: (key: string | null) => void
   headerAction?: ReactNode
   children: ReactNode
 }

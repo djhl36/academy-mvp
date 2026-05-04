@@ -11,14 +11,14 @@ type StudentDetail = Student & {
     subjects: {
       id: string
       name: string
-    } | null
+    }[]
   }[]
   class_group_students?: {
     class_group_id: string
     class_groups: {
       id: string
       name: string
-    } | null
+    }[]
   }[]
 }
 
@@ -31,10 +31,10 @@ type RecordRow = {
   teacher_note: string | null
   subjects: {
     name: string
-  } | null
+  }[]
   class_groups: {
     name: string
-  } | null
+  }[]
 }
 
 type InquiryRow = {
@@ -237,12 +237,14 @@ export default function ReportGenerator() {
 
     const subjectNames =
       studentDetail?.student_subjects
-        ?.map((item) => item.subjects?.name)
+        ?.map((item) => item.subjects?.map(s => s.name))
+        .flat()
         .filter(Boolean) ?? []
 
     const classGroupNames =
       studentDetail?.class_group_students
-        ?.map((item) => item.class_groups?.name)
+        ?.map((item) => item.class_groups?.map(c => c.name))
+        .flat()
         .filter(Boolean) ?? []
 
     const prompt = `
@@ -260,7 +262,7 @@ ${messageType === 'custom' ? customPrompt.trim() : customPrompt.trim() || '없�
 
 [학생 기본 정보]
 이름: ${studentDetail?.name ?? '미상'}
-학생코드: ${studentDetail?.student_code ?? '없음'}
+  학생코드: ${studentDetail?.student_login_id ?? '없음'}
 학년: ${studentDetail?.grade ?? '미상'}
 학교: ${studentDetail?.school ?? '미상'}
 학생 연락처: ${studentDetail?.student_phone ?? '없음'}

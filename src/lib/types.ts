@@ -12,6 +12,12 @@ export type Student = {
   created_at: string
 }
 
+export type Subject = {
+  id: string
+  name: string
+  created_at: string
+}
+
 export type ClassGroup = {
   id: string
   name: string

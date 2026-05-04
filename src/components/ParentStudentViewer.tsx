@@ -14,12 +14,12 @@ type StudentProfile = {
   student_subjects?: {
     subjects: {
       name: string
-    } | null
+    }[]
   }[]
   class_group_students?: {
     class_groups: {
       name: string
-    } | null
+    }[]
   }[]
 }
 
@@ -32,10 +32,10 @@ type RecordRow = {
   teacher_note: string | null
   subjects: {
     name: string
-  } | null
+  }[]
   class_groups: {
     name: string
-  } | null
+  }[]
 }
 
 type Props = {
@@ -170,14 +170,14 @@ export default function ParentStudentViewer({ onIdentified }: Props) {
             <div className="mt-4">
               <p className="mb-1 text-sm font-medium">수강 과목</p>
               <p className="text-sm text-slate-600">
-                {student.student_subjects?.map((item) => item.subjects?.name).filter(Boolean).join(', ') || '-'}
+                {student.student_subjects?.map((item) => item.subjects?.map(s => s.name)).flat().filter(Boolean).join(', ') || '-'}
               </p>
             </div>
 
             <div className="mt-4">
               <p className="mb-1 text-sm font-medium">수업반</p>
               <p className="text-sm text-slate-600">
-                {student.class_group_students?.map((item) => item.class_groups?.name).filter(Boolean).join(', ') || '-'}
+                {student.class_group_students?.map((item) => item.class_groups?.map(c => c.name)).flat().filter(Boolean).join(', ') || '-'}
               </p>
             </div>
 
@@ -200,7 +200,7 @@ export default function ParentStudentViewer({ onIdentified }: Props) {
                   <div key={record.id} className="rounded-xl border p-4">
                     <div className="mb-2 flex items-center justify-between">
                       <p className="font-medium">
-                        {record.subjects?.name || '과목 없음'} / {record.class_groups?.name || '수업반 없음'}
+                        {record.subjects?.[0]?.name || '과목 없음'} / {record.class_groups?.[0]?.name || '수업반 없음'}
                       </p>
                       <span className="text-xs text-slate-400">{record.record_date}</span>
                     </div>

@@ -18,7 +18,7 @@ type GroupRow = {
   name: string
   class_group_students: {
     student_id: string
-    students: StudentItem | StudentItem[] | null
+    students: Student | Student[] | null
   }[]
 }
 
